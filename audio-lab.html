@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terval — Audio Lab</title>
+    <style>
+        :root { color-scheme: dark; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            color: #cfe3db;
+            background: radial-gradient(circle at 50% 30%, #0e1a16, #060a09 70%);
+        }
+        main { width: min(640px, 92vw); padding: 40px 0 80px; }
+        h1 { font-weight: 500; font-size: 1.6rem; color: #8fb9ab; }
+        p.hint { color: #6f8a81; font-size: .9rem; margin-top: -8px; }
+        section {
+            margin: 22px 0; padding: 18px 20px;
+            background: rgba(143, 185, 171, 0.05);
+            border: 1px solid rgba(143, 185, 171, 0.12);
+            border-radius: 14px;
+        }
+        h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: #6f8a81; margin: 0 0 14px; }
+        button {
+            font: inherit; color: #d9efe7; cursor: pointer;
+            background: rgba(143, 185, 171, 0.12);
+            border: 1px solid rgba(143, 185, 171, 0.25);
+            border-radius: 10px; padding: 10px 16px; margin: 4px 6px 4px 0;
+            transition: background .15s, transform .05s;
+        }
+        button:hover { background: rgba(143, 185, 171, 0.22); }
+        button:active { transform: scale(0.97); }
+        button:disabled { opacity: .35; cursor: not-allowed; }
+        .intervals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .intervals button { margin: 0; text-align: left; }
+        .intervals button span { display: block; font-size: .7rem; color: #6f8a81; }
+        .tonic { font-size: 2rem; color: #b7e0d2; }
+        .meta { color: #6f8a81; font-size: .85rem; }
+        label { display: inline-flex; align-items: center; gap: 8px; margin-right: 24px; color: #9fc0b5; }
+        input[type="range"] { width: 160px; accent-color: #8fb9ab; }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Terval — Audio Lab</h1>
+        <p class="hint">Test bench for the audio engine (handpan + drone). Start the audio, then listen.</p>
+
+        <section>
+            <h2>Context</h2>
+            <button id="start">▶ Start audio</button>
+            <button id="newRound" disabled>🔄 New round (random tonic)</button>
+            <button id="drone" disabled>Drone: —</button>
+            <p>Tonic: <span class="tonic" id="tonicName">—</span>
+               <span class="meta" id="roundMeta"></span></p>
+        </section>
+
+        <section>
+            <h2>Intervals (handpan)</h2>
+            <div class="intervals" id="intervals"></div>
+        </section>
+
+        <section>
+            <h2>Output</h2>
+            <label>Volume <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" /></label>
+            <label><input type="checkbox" id="mute" /> Mute</label>
+        </section>
+    </main>
+    <script type="module" src="/src/audio-lab.ts"></script>
+</body>
+</html>
